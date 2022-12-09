@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<body style="background-color:blue; color:white; font-size:70pt; font-family:Arial; text-align:center; user-select:none">
+    <div style="width:10%; height:100%;display:block;float:left">
+        <table>
+            <tr>
+                <td>
+                    <div class="SumVal" id="SumVal8">40</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="SumVal" id="SumVal7">30</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="SumVal" id="SumVal6">20</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="SumVal" id="SumVal5">15</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="SumVal" id="SumVal4">10</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="SumVal" id="SumVal3">5</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="SumVal" id="SumVal2">2</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="SumVal" id="SumVal1" style="">1</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="position:fixed; float: right; display: block; right:0; bottom:0">
+        <table>
+            <tr>
+                <td>
+                    <div style="color: yellow; font-size: 80pt; float: left; display: block">Банк: </div>
+                    <input class="bankTotal" style="float: left; display: block; height:70pt; font-size:80pt;width:200pt" value="0">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="position:fixed; float: right; display: block; left:20%; bottom:0">
+        <table>
+            <tr>
+                <td>
+                    <div style="color: yellow; font-size: 80pt; float: left; display: block">За раунд: </div>
+                    <input class="bankCurrent" style="float: left; display: block; height:70pt; font-size:80pt;width:200pt" value="0">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+
+        var a = 0;
+        var curMoney = 0;
+        var localBank = 0;
+        // Add event listener on keydown
+        document.addEventListener('keydown', (event) => {
+            var name = event.key;
+            var code = event.code;
+            if (name === 'Control') {
+                // Do nothing.
+                return;
+            }
+            if (code === 'Enter') {
+                //alert(curMoney);
+                $('.SumVal').css('background-color', 'blue');
+                $('.bankCurrent').val(curMoney + parseInt($('.bankCurrent').val()));
+                a = 0;
+                curMoney = 0;
+            }
+            if (code === "ArrowUp") {
+                a = a + 1;
+                //alert(curMoney);
+                $('.SumVal').css('background-color','blue');
+                switch (a) {
+                    case 1: curMoney = 1; break;
+                    case 2: curMoney = 2; break;
+                    case 3: curMoney = 5; break;
+                    case 4: curMoney = 10; break;
+                    case 5: curMoney = 15; break;
+                    case 6: curMoney = 20; break;
+                    case 7: curMoney = 30; break;
+                    case 8: curMoney = 40;
+                            $('.SumVal').css('background-color', 'blue');
+                            $('.bankCurrent').val(curMoney + parseInt($('.bankCurrent').val()));
+                            a = 0;
+                            curMoney = 0; break;
+                    default: curMoney = 0
+                }
+                $('#SumVal' + a).css('background-color','red');
+            }
+            if (code === "ArrowDown") {
+                a = 0;
+                curMoney = 0;
+                $('.SumVal').css('background-color', 'blue');
+            }
+
+            if (code === "Space") {
+                $('.SumVal').css('background-color', 'blue');
+                $('.bankTotal').val(parseInt($('.bankTotal').val()) + parseInt($('.bankCurrent').val()));
+                $('.bankCurrent').val(0);
+                curMoney = 0;
+                a = 0;
+            }
+
+        }, false);
+
+    </script>
+</body>
+
+</html>
